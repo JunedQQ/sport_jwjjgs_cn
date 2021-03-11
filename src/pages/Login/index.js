@@ -26,7 +26,7 @@ function Login() {
       <PageHeader title="登录">
         <Form
           onFinish={(e) => run(e)}
-          initialValues={{ username: "2003001132", password: "18384894965k" }}
+          initialValues={{ username: "", password: "" }}
         >
           <Form.Item name="username">
             <Input addonBefore="账号" />
@@ -36,7 +36,7 @@ function Login() {
           </Form.Item>
           <Form.Item>
             <Button htmlType="submit" type="primary" block loading={loading}>
-              登录
+              登录乐健
             </Button>
           </Form.Item>
         </Form>
