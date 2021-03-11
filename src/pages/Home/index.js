@@ -219,7 +219,12 @@ function Home() {
               <br />
             </Typography.Text>
             <Typography.Text>
-              2.完全免费开源，请勿上当受骗，如果你是收费看到页面，请及时举报诈骗者
+              3.完全免费开源，请勿上当受骗，如果你是收费看到页面，请及时举报诈骗者
+              <br />
+            </Typography.Text>
+            <Typography.Text>
+              4.github:
+              <a href="https://github.com/jwjjgs/sport_jwjjgs_cn">点我进入</a>
               <br />
             </Typography.Text>
           </Card>
