@@ -209,7 +209,7 @@ function Home() {
         }
       >
         <Space direction="vertical" style={{ width: "100%" }} size="large">
-          <Card title="告知">
+          <Card title="告知 更新于2021/03/16">
             <Typography.Text>
               1.本功能属于纯前端实现，不存在收集，保留用户信息等
               <br />
