@@ -7,7 +7,7 @@ module.exports = {
       webpackConfig.output = {
         ...webpackConfig.output,
         path: path.resolve(__dirname, "docs"), // 修改输出文件目录
-        publicPath: "/",
+        publicPath: "./",
       };
       webpackConfig.en;
       return webpackConfig;
