@@ -195,7 +195,7 @@ function Home() {
 
   useEffect(() => {
     listRun();
-  }, []);
+  }, []); //eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <>
