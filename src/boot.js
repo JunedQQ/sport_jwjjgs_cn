@@ -1,6 +1,7 @@
 import { message as Msg } from "antd";
 import axios from "axios";
 
+axios.defaults.withCredentials = false;
 axios.defaults.baseURL = "https://upes.legym.cn/";
 axios.defaults.headers.post["Content-Type"] =
   "application/json;; charset=utf-8";
