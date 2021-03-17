@@ -8,6 +8,7 @@ import {
   List,
   message,
   PageHeader,
+  Popover,
   Space,
   Typography,
 } from "antd";
@@ -16,6 +17,7 @@ import { useRequest } from "ahooks";
 import axios from "axios";
 import moment from "moment";
 import md5 from "js-md5";
+import copy from "copy-to-clipboard";
 
 const VERSION = "V 2.5.6";
 
@@ -23,12 +25,12 @@ const getRandom = (n, m) => Math.floor(Math.random() * (m - n + 1)) + n;
 
 const getList = (pageNum) =>
   new Promise((resolve, reject) => {
-    const startTime = moment().subtract(90, "days").valueOf();
+    const startTime = moment().subtract(720, "days").valueOf();
     const endTime = moment().valueOf();
     axios
       .post("running/api/v1/running/recordList", {
         pageNum,
-        pageSize: 20,
+        pageSize: 100,
         startTime,
         endTime,
       })
@@ -195,6 +197,7 @@ function Home() {
 
   useEffect(() => {
     listRun();
+    getUser();
   }, []); //eslint-disable-line react-hooks/exhaustive-deps
 
   return (
@@ -224,7 +227,9 @@ function Home() {
             </Typography.Text>
             <Typography.Text>
               4.github:
-              <a href="https://github.com/jwjjgs/sport_jwjjgs_cn">点我进入</a>
+              <a href="https://github.com/jwjjgs/sport_jwjjgs_cn">
+                点我查看开源代码/更新日志
+              </a>
               <br />
             </Typography.Text>
           </Card>
@@ -260,10 +265,48 @@ function Home() {
                       <CloseCircleTwoTone twoToneColor="#eb2f96" />
                     )
                   }
-                  title={`ID:${item.id}`}
-                  description={`距离:${item.validDistance}m 时间:${item.totalTime}s`}
+                  title={`距离:${item.validDistance}m 时间:${item.totalTime}s`}
+                  description={item.startTime}
                 />
-                <div>{item.startTime}</div>
+                <Popover
+                  content={
+                    <Space direction="vertical">
+                      <Link
+                        to={{
+                          pathname: "/",
+                          state: {
+                            circuitInfo: JSON.parse(item.circuitInfo),
+                          },
+                        }}
+                      >
+                        <Button ghost type="primary">
+                          查看路线轨迹
+                        </Button>
+                      </Link>
+
+                      <Button
+                        type="primary"
+                        onClick={() => {
+                          try {
+                            const { latitude, longitude, speed } = JSON.parse(
+                              item.circuitInfo
+                            );
+                            copy(
+                              JSON.stringify({ latitude, longitude, speed })
+                            );
+                            message.success("已复制");
+                          } catch {
+                            message.error("复制失败");
+                          }
+                        }}
+                      >
+                        导出轨迹数据
+                      </Button>
+                    </Space>
+                  }
+                >
+                  <Button>更多</Button>
+                </Popover>
               </List.Item>
             )}
           />
